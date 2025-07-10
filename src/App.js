@@ -36,7 +36,6 @@ function App() {
       const res = await axios.get(`${API_BASE}/api/transactions/${user._id}`);
       setTransactions(res.data);
 
-      // Refresh user balance
       const updatedUser = await axios.post(`${API_BASE}/api/users/login`, {
         email,
         password,
@@ -61,53 +60,55 @@ function App() {
   };
 
   return (
-    <div className="App">
-      {!user ? (
-        <div>
-          <h2>Login</h2>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-          />
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-          />
-          <button onClick={handleLogin}>Login</button>
-        </div>
-      ) : (
-        <div>
-          <h2>Welcome {user.name}</h2>
-          <h3>Balance: ${user.balance}</h3>
+    <div className="app-container">
+      <div className="App">
+        {!user ? (
+          <div>
+            <h2>Login</h2>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+            />
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+            />
+            <button onClick={handleLogin}>Login</button>
+          </div>
+        ) : (
+          <div>
+            <h2>Welcome {user.name}</h2>
+            <h3>Balance: ${user.balance}</h3>
 
-          <input
-            type="number"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            placeholder="Amount"
-          />
-          <select value={type} onChange={(e) => setType(e.target.value)}>
-            <option value="deposit">Deposit</option>
-            <option value="withdrawal">Withdrawal</option>
-          </select>
-          <button onClick={handleTransaction}>Submit</button>
+            <input
+              type="number"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              placeholder="Amount"
+            />
+            <select value={type} onChange={(e) => setType(e.target.value)}>
+              <option value="deposit">Deposit</option>
+              <option value="withdrawal">Withdrawal</option>
+            </select>
+            <button onClick={handleTransaction}>Submit</button>
 
-          <h4>Transaction History</h4>
-          <ul>
-            {transactions.map((t, i) => (
-              <li key={i}>
-                {t.type} - ${t.amount} on {new Date(t.date).toLocaleDateString()}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+            <h4>Transaction History</h4>
+            <ul>
+              {transactions.map((t, i) => (
+                <li key={i}>
+                  {t.type} - ${t.amount} on {new Date(t.date).toLocaleDateString()}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
 
-      <footer style={{ marginTop: '40px', textAlign: 'center', color: '#555', fontSize: '14px' }}>
+      <footer className="footer">
         Designed by <strong>Vamshi Sindhe</strong>
       </footer>
     </div>
