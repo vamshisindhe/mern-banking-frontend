@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
@@ -10,7 +11,7 @@ function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const API_BASE = 'https://mern-banking-backend.onrender.com';
+  const API_BASE = 'https://mern-banking-backend.onrender.com'; // Render backend URL
 
   useEffect(() => {
     if (user) {
@@ -62,7 +63,7 @@ function App() {
   return (
     <div className="app-container">
       <div className="animated-heading">
-        <h1>🏦 Banking Dashboard</h1>
+        <h1>Banking Dashboard</h1>
       </div>
 
       <div className="App">
@@ -104,7 +105,8 @@ function App() {
             <ul>
               {transactions.map((t, i) => (
                 <li key={i}>
-                  {t.type} - ${t.amount} on {new Date(t.date).toLocaleDateString()}
+                  {t.type} - ${t.amount} on{' '}
+                  {new Date(t.date).toLocaleDateString()}
                 </li>
               ))}
             </ul>
