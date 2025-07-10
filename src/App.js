@@ -61,6 +61,10 @@ function App() {
 
   return (
     <div className="app-container">
+      <div className="animated-heading">
+        <h1>🏦 Banking Dashboard</h1>
+      </div>
+
       <div className="App">
         {!user ? (
           <div>

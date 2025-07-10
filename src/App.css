@@ -1,8 +1,13 @@
+/* Make body and html stretch full height */
 html, body, .app-container {
   height: 100%;
   margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
 }
 
+/* Flexbox layout to push footer to bottom */
 .app-container {
   display: flex;
   flex-direction: column;
@@ -10,21 +15,103 @@ html, body, .app-container {
   min-height: 100vh;
 }
 
+/* Main app box */
 .App {
   flex: 1;
   max-width: 600px;
-  margin: auto;
-  padding: 20px;
+  margin: 40px auto;
   background: white;
+  padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Input & button styling */
+input,
+select,
+button {
+  margin: 10px 0;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* List styling */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+}
+
+/* Footer at bottom */
+.footer {
+  text-align: center;
+  padding: 15px;
+  background: #eaeaea;
+  color: #555;
+  font-size: 14px;
+  border-top: 1px solid #ccc;
+}
+
+.footer strong {
+  color: #007bff;
+}
+.animated-heading {
+  text-align: center;
+  padding: 20px 0;
+  animation: fadeInDown 1s ease-out;
+}
+
+.animated-heading h1 {
+  font-size: 2.5rem;
+  color: #007bff;
+  font-weight: bold;
+  margin: 0;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .footer {
   text-align: center;
-  padding: 10px 0;
-  color: #777;
-  font-size: 14px;
+  margin-top: 40px;
+  padding: 15px;
   background: #f1f1f1;
+  font-size: 0.95rem;
+  color: #333;
   border-top: 1px solid #ddd;
 }
