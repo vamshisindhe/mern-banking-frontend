@@ -9,7 +9,9 @@ function App() {
   const [type, setType] = useState('deposit');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const API_BASE = 'https://mern-banking-backend.onrender.com'; // Change if needed
+
+  const API_BASE = 'https://mern-banking-backend.onrender.com';
+
   useEffect(() => {
     if (user) {
       axios
@@ -60,12 +62,8 @@ function App() {
 
   return (
     <div className="App">
-      <h1 style={{ textAlign: "center", color: "#007bff" }}>
-        Vamshi's Banking Dashboard
-      </h1>
-
       {!user ? (
-        <div className="login-box">
+        <div>
           <h2>Login</h2>
           <input
             type="email"
@@ -82,8 +80,8 @@ function App() {
           <button onClick={handleLogin}>Login</button>
         </div>
       ) : (
-        <div className="dashboard">
-          <h2>Welcome, {user.name}</h2>
+        <div>
+          <h2>Welcome {user.name}</h2>
           <h3>Balance: ${user.balance}</h3>
 
           <input
@@ -108,6 +106,10 @@ function App() {
           </ul>
         </div>
       )}
+
+      <footer style={{ marginTop: '40px', textAlign: 'center', color: '#555', fontSize: '14px' }}>
+        Designed by <strong>Vamshi Sindhe</strong>
+      </footer>
     </div>
   );
 }
