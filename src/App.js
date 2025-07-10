@@ -9,11 +9,11 @@ function App() {
   const [type, setType] = useState('deposit');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const API_BASE = 'https://mern-banking-backend.onrender.com'; // Change if needed
   useEffect(() => {
     if (user) {
       axios
-        .get(`http://localhost:5000/api/transactions/${user._id}`)
+        .get(`${API_BASE}/api/transactions/${user._id}`)
         .then((res) => {
           setTransactions(res.data);
         })
@@ -25,22 +25,21 @@ function App() {
 
   const handleTransaction = async () => {
     try {
-      await axios.post('http://localhost:5000/api/transactions', {
+      await axios.post(`${API_BASE}/api/transactions`, {
         userId: user._id,
         amount: Number(amount),
         type,
       });
 
-      const res = await axios.get(`http://localhost:5000/api/transactions/${user._id}`);
+      const res = await axios.get(`${API_BASE}/api/transactions/${user._id}`);
       setTransactions(res.data);
-      
-      // Reload user balance
-      const updatedUser = await axios.post('http://localhost:5000/api/users/login', {
+
+      // Refresh user balance
+      const updatedUser = await axios.post(`${API_BASE}/api/users/login`, {
         email,
         password,
       });
       setUser(updatedUser.data);
-
     } catch (err) {
       console.error('Transaction failed:', err.message);
     }
@@ -48,7 +47,7 @@ function App() {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/api/users/login', {
+      const res = await axios.post(`${API_BASE}/api/users/login`, {
         email,
         password,
       });
@@ -61,8 +60,12 @@ function App() {
 
   return (
     <div className="App">
+      <h1 style={{ textAlign: "center", color: "#007bff" }}>
+        Vamshi's Banking Dashboard
+      </h1>
+
       {!user ? (
-        <div>
+        <div className="login-box">
           <h2>Login</h2>
           <input
             type="email"
@@ -79,8 +82,8 @@ function App() {
           <button onClick={handleLogin}>Login</button>
         </div>
       ) : (
-        <div>
-          <h2>Welcome {user.name}</h2>
+        <div className="dashboard">
+          <h2>Welcome, {user.name}</h2>
           <h3>Balance: ${user.balance}</h3>
 
           <input
